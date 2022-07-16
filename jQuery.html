@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+    <style>
+      button {
+        display: block;
+        margin: auto;
+        border: solid 2px black;
+        padding: 10px;
+        border-radius: 10px;
+      }
+      .name {
+        display: block;
+        text-align: center;
+      }
+      .character {
+        display: block;
+        margin: auto;
+        width: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <button>Generate Characters</button>
+    <h1 class="name"></h1>
+    <img src="" alt="" class="character" />
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("button").on("click", function () {
+          const randomNumber = Math.ceil(Math.random() * 88);
+          $.get(
+            `https://rawcdn.githack.com/akabab/starwars-api/0.2.1/api/id/${randomNumber}.json`,
+            function (data) {
+              $("h1.name").text(data["name"]);
+              $(".character").attr("src", data["image"]);
+            }
+          );
+        });
+      });
+    </script>
+  </body>
+</html>
